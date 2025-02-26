@@ -1,0 +1,11 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Add any custom global styles here */
+  body {
+    font-family: "Inter", sans-serif;
+  }
+}
