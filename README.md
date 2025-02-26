@@ -1,0 +1,2 @@
+# squishy
+File Compression App
