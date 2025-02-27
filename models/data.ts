@@ -1,8 +1,7 @@
-export interface ImageMetadata {
-  guid: string;
-  dateUploaded: string;
-  image: {
-    original: string;
-    compressed: string | null;
-  };
+export interface IImage {
+  name?: string;
+  type?: string;
+  size?: string;
+  uploadedAt?: string;
+  base64?: string;
 }

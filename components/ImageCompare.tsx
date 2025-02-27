@@ -2,15 +2,18 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import clsx from "clsx";
 
 interface SliderProps {
-  beforeImgSrc: string;
-  afterImgSrc: string;
+  beforeImgSrc?: string;
+  afterImgSrc?: string;
+  className?: string;
 }
 
 export const ImageCompare: React.FC<SliderProps> = ({
   beforeImgSrc,
   afterImgSrc,
+  className,
 }) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
@@ -44,27 +47,29 @@ export const ImageCompare: React.FC<SliderProps> = ({
 
   return (
     <div
-      className="w-full relative"
+      className={clsx("w-full relative ", className)}
       onMouseUp={handleInteractionEnd}
       onTouchEnd={handleInteractionEnd}
     >
+      <div className="flex justify-between mb-2">
+        <span>Original</span>
+        <span>Compressed</span>
+      </div>
       <div
         className="relative w-full aspect-[70/45] m-auto overflow-hidden select-none"
         onMouseMove={handleMouseMove}
         onTouchMove={handleTouchMove}
         onMouseDown={handleInteractionStart}
         onTouchStart={handleInteractionStart}
-        style={{ touchAction: "none" }} // Prevent the default touch action (like scrolling)
+        style={{ touchAction: "none" }}
       >
-        <Image src={afterImgSrc} alt="" fill priority />
-
+        {afterImgSrc && <Image src={afterImgSrc} alt="" fill priority />}
         <div
           className="absolute top-0 left-0 right-0 w-full aspect-[70/45] m-auto overflow-hidden select-none"
           style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
         >
-          <Image src={beforeImgSrc} fill priority alt="" />
+          {beforeImgSrc && <Image src={beforeImgSrc} fill priority alt="" />}
         </div>
-
         <div
           className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize"
           style={{
