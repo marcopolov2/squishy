@@ -10,5 +10,6 @@
   /* Add any custom global styles here */
   body {
     font-family: "Inter", sans-serif;
+    scroll-behavior: smooth;
   }
 }

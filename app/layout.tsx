@@ -1,25 +1,36 @@
-// app/layout.tsx
 import { ReactNode } from "react";
-import "../styles/global.css"; // Global styles
+import "../styles/global.css";
+import Theme from "@/theme-provider";
+import Image from "next/image";
+import logo from "./icon.ico";
 
 export const metadata = {
   title: "Squishy",
-  description: "An app for uploading and compressing images",
+  description: "Squish your images smaller",
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className="bg-white text-black dark:bg-gray-800 dark:text-white">
-        <header className="bg-blue-300 text-white p-4 text-center">
-          <h1>Squishy</h1>
-        </header>
+    <html suppressHydrationWarning lang="en">
+      <link rel="shortcut icon" href="./icon.ico" type="image/png" />
+      <meta name="description" content="Welcome to Squishi" />
+      <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no"
+      />
 
-        <main className="container mx-auto p-4">{children}</main>
+      <body className="bg-white text-black dark:bg-gray-800 dark:text-white flex flex-col min-h-screen">
+        <Theme>
+          <header className="bg-blue-300 text-white dark:text-blue-300 p-4 text-center dark:bg-gray-800">
+            <Image src={logo} alt="logo" className="w-36 m-auto" priority />
+          </header>
+          <main className="container mx-auto p-4 flex-1">{children}</main>
 
-        <footer className="bg-gray-100 text-blue-300 p-4 text-center mt-8">
-          <p>© 2025 Squishy</p>
-        </footer>
+          <footer className="bg-gray-100 text-gray-500 p-4 text-center dark:bg-gray-800">
+            <p>© 2025 Squishi</p>
+          </footer>
+        </Theme>
       </body>
     </html>
   );

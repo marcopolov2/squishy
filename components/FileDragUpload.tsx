@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import { FILE_TYPES } from "@/utils/images/constants";
 
 interface FileDragUploadProps {
   setFile: (file: File) => void;
@@ -29,13 +30,13 @@ const FileDragUpload: React.FC<FileDragUploadProps> = ({
   return (
     <div
       className={clsx(
-        "w-full flex items-center justify-center rounded-md border-2 border-dashed border-gray-700 dark:border-white bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600",
+        "flex relative items-center justify-center rounded-md border-2 border-dashed border-gray-700 dark:border-white bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600",
         className
       )}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      <label className="flex flex-col items-center m-4 cursor-pointer">
+      <label className="flex flex-col w-full items-center m-4 cursor-pointer">
         <span className="text-gray-400 dark:text-gray-200">
           Drag & Drop Files
         </span>
@@ -48,12 +49,13 @@ const FileDragUpload: React.FC<FileDragUploadProps> = ({
         />
 
         {file ? (
-          <span className="text-green-500 dark:text-green-400">
-            {file.name}
-          </span>
+          <span className="text-[#f35c0b]"> {file.name}</span>
         ) : (
-          <span className="text-gray-500 dark:text-gray-400">
+          <span className="text-gray-500 dark:text-gray-400 flex flex-col items-center">
             or click to select
+            <span className="text-sm">
+              Support formats: {FILE_TYPES.join(", ")}
+            </span>
           </span>
         )}
       </label>
