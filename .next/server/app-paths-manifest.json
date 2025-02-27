@@ -1,3 +1,5 @@
 {
-  "/_not-found/page": "app/_not-found/page.js"
+  "/compress/page": "app/compress/page.js",
+  "/api/upload/route": "app/api/upload/route.js",
+  "/api/compress/route": "app/api/compress/route.js"
 }

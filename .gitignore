@@ -1,1 +1,36 @@
-node_modules
+# Node modules
+node_modules/
+
+# Build output
+.next/
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# VS Code settings
+.vscode/
+
+# macOS files
+.DS_Store
+
+# Yarn specific files
+.yarn/
+
+# NPM specific files
+package-lock.json
+
+# .eslint cache
+.eslintcache
+
+# Tailwind specific
+tailwind.config.js
+tailwind.config.ts

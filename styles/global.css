@@ -1,4 +1,7 @@
 /* app/globals.css */
+
+@import url("./slider.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
