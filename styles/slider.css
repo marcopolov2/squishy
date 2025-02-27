@@ -1,0 +1,43 @@
+/* Slider */
+.slider {
+  #quality {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 0.5rem;
+    border-radius: 0.625rem;
+    background: #ddd;
+    transition: background-color 0.3s ease;
+  }
+
+  #quality:focus {
+    outline: none;
+    background-color: #ddd;
+  }
+
+  #quality::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: #4caf50; /* Change this to your desired thumb color */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #quality::-moz-range-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: #4caf50; /* Change this to your desired thumb color */
+    cursor: pointer;
+  }
+
+  #quality::-ms-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: #4caf50; /* Change this to your desired thumb color */
+    cursor: pointer;
+  }
+}

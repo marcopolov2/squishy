@@ -2,12 +2,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import clsx from "clsx";
 
-const ThemeToggle = () => {
+interface ThemeToggleProps {
+  className?: string;
+}
+
+const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    // Check if dark mode was previously set
     const savedMode = localStorage.getItem("darkMode");
     if (savedMode === "true") {
       setIsDarkMode(true);
@@ -34,7 +38,10 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="p-2 bg-gray-200 dark:bg-gray-600 rounded-full"
+      className={clsx(
+        "p-2 bg-gray-200 dark:bg-gray-600 rounded-full",
+        className
+      )}
     >
       {isDarkMode ? "Light Mode" : "Dark Mode"}
     </button>
