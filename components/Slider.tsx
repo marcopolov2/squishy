@@ -13,8 +13,8 @@ interface FileDragUploadProps {
 const Slider: React.FC<FileDragUploadProps> = ({
   setValue,
   value,
-  min = 1,
-  max = 99,
+  min = 0,
+  max = 100,
   label,
   className,
 }) => {
@@ -24,7 +24,7 @@ const Slider: React.FC<FileDragUploadProps> = ({
   // Function to update slider's background and thumb rotation
   const updateSliderStyles = (slider: HTMLInputElement, value: number) => {
     const progress = (value / parseFloat(slider.max)) * 100;
-    slider.style.background = `linear-gradient(to right, #f50 ${progress}%, #ccc ${progress}%)`;
+    slider.style.background = `linear-gradient(to right, #e4793f ${progress}%, #ccc ${progress}%)`;
   };
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const Slider: React.FC<FileDragUploadProps> = ({
     <div
       className={clsx(
         "slider",
-        "mt-4 mb-16 flex gap-3 flex-col items-center",
+        "my-8 flex gap-3 flex-col items-center mx-auto",
         className
       )}
       style={{ touchAction: "none" }}
@@ -64,7 +64,7 @@ const Slider: React.FC<FileDragUploadProps> = ({
         htmlFor="quality"
         className="block mb-8 text-xl font-medium text-gray-900 dark:text-white"
       >
-        {label} <span ref={sliderValue}>{value}</span> %
+        {label} <span ref={sliderValue}>{value}</span>
       </label>
 
       <input

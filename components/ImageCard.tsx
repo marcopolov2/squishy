@@ -31,8 +31,12 @@ const ImageCard: React.FC<ImageCardProps> = ({ image, heading, className }) => {
   };
 
   return (
-    <Card heading={heading} className={className}>
-      <div className="relative min-h-96 w-96">
+    <Card
+      heading={heading}
+      className={className}
+      headingClassName="text-center"
+    >
+      <div className="relative h-32 md:h-80">
         <Image
           src={image?.base64 || ""}
           alt=""
@@ -47,13 +51,14 @@ const ImageCard: React.FC<ImageCardProps> = ({ image, heading, className }) => {
           {formatDate(image?.uploadedAt, "DD-MM-YYYY")}
         </p>
         <p>
-          <span className="font-medium">name:</span> {image?.name}
+          <span className="font-medium">Name:</span> {image?.name}
         </p>
         <p>
-          <span className="font-medium">type:</span> {image?.type}
+          <span className="font-medium">Type:</span> {image?.type}
         </p>
         <p>
-          <span className="font-medium">size:</span> {image?.size} KB
+          <span className="font-medium">Size: </span>
+          {image?.size}
         </p>
       </div>
 

@@ -47,11 +47,11 @@ export const ImageCompare: React.FC<SliderProps> = ({
 
   return (
     <div
-      className={clsx("w-full relative", className)}
+      className={clsx("w-full relative ", className)}
       onMouseUp={handleInteractionEnd}
       onTouchEnd={handleInteractionEnd}
     >
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-2">
         <span>Original</span>
         <span>Compressed</span>
       </div>

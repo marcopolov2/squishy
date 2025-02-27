@@ -5,15 +5,14 @@ import Image from "next/image";
 import logo from "./icon.ico";
 
 export const metadata = {
-  title: "Squishy",
+  title: "Squishi",
   description: "Squish your images smaller",
+  icons: { icon: "/icon.ico" },
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html suppressHydrationWarning lang="en">
-      <link rel="shortcut icon" href="./icon.ico" type="image/png" />
-      <meta name="description" content="Welcome to Squishi" />
       <meta httpEquiv="x-ua-compatible" content="ie=edge" />
       <meta
         name="viewport"
@@ -27,7 +26,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           </header>
           <main className="container mx-auto p-4 flex-1">{children}</main>
 
-          <footer className="bg-gray-100 text-gray-500 p-4 text-center dark:bg-gray-800">
+          <footer className="bg-gray-100 text-gray-500 p-4 mt-16 text-center dark:bg-gray-800">
             <p>© 2025 Squishi</p>
           </footer>
         </Theme>

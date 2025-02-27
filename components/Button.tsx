@@ -24,10 +24,10 @@ const Button: React.FC<ButtonProps> = ({
       className={clsx(
         "relative inline-flex shadow-md select-none items-center gap-1.5 rounded-md px-2.5 py-1.5 font-medium transition-all hover:cursor-pointer disabled:opacity-50 disabled:hover:cursor-not-allowed",
         intent === "primary"
-          ? "border-none bg-[#8a8880] text-white text-xs hover:bg-[#f35c0b] focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 active:bg-blue-700 disabled:hover:bg-blue-500"
+          ? "border-none bg-blue-400 text-white text-xs hover:bg-blue-400 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 active:bg-blue-400 disabled:hover:bg-blue-400"
           : "",
         intent === "secondary"
-          ? "bg-[#f35c0b] text-white text-lg hover:bg-[#e68f60] disabled:hover:bg-white px-4 py-2 "
+          ? "bg-[#f35c0b] text-white text-lg hover:bg-[#e68f60] disabled:hover:bg-[#e68f60] px-4 py-2 "
           : "",
 
         isLoading ? "pointer-events-none" : "",

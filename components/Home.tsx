@@ -3,12 +3,13 @@ import axios from "axios";
 import FileDragUpload from "./FileDragUpload";
 import { ImageCompare } from "./ImageCompare";
 import Slider from "./Slider";
-import { getSizeInKB } from "@/utils/utility";
+import { formatFileSize, getSizeInKB } from "@/utils/utility";
 import ThemeToggle from "./ThemeToggle";
 import ImageCard from "./ImageCard";
 import { IImage } from "@/models/data";
 import Card from "./Card";
 import Button from "./Button";
+import CircularProgressBar from "./CircularProgressBar";
 
 const Home = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -52,10 +53,11 @@ const Home = () => {
       if (!data?.fileData) throw new Error("Invalid response from server.");
 
       setUploadedFile(data.fileData);
+    } catch (error) {
+      const errorMessage =
+        error?.response?.data?.error || "Error uploading image.";
 
-      console.log("File uploaded successfully:", data);
-    } catch (error: any) {
-      setError(error.response?.data?.error || "Error uploading image.");
+      setError(errorMessage);
     } finally {
       setUploading(false);
     }
@@ -97,7 +99,6 @@ const Home = () => {
       <FileDragUpload
         className="h-40 w-full"
         file={file}
-        setFile={setFile}
         handleFileChange={handleFileChange}
       />
 
@@ -117,21 +118,24 @@ const Home = () => {
       <section className="flex gap-8 w-full justify-center my-8">
         {uploadedFile && (
           <ImageCard
-            className=""
-            heading="Original Image"
+            className="flex-1"
+            heading="Original"
             image={{
               ...uploadedFile,
               base64: `data:${uploadedFile?.type};base64,${uploadedFile?.base64}`,
+              size: formatFileSize(beforeSize),
             }}
           />
         )}
 
         {compressedFile && (
           <ImageCard
-            heading="Compressed Image"
+            className="flex-1"
+            heading="Compressed"
             image={{
               ...compressedFile,
               base64: `data:${compressedFile?.type};base64,${compressedFile?.base64}`,
+              size: formatFileSize(afterSize),
             }}
           />
         )}
@@ -141,8 +145,9 @@ const Home = () => {
         <Card headingClassName="text-center" className="w-full">
           {uploadedFile && (
             <Slider
-              className="w-1/2 m-auto mt-4"
-              label="Compress Factor:"
+              className="w-[80%] md:w-1/2"
+              label="Quality:"
+              min={1}
               value={quality}
               setValue={setQuality}
             />
@@ -162,15 +167,24 @@ const Home = () => {
           )}
 
           {uploadedFile && compressedFile && (
-            <section className="text-center">
-              Original new
-              <p>{savingSize.toFixed(2)} KB</p>
-              <p>{savingPerc.toFixed(2)}%</p>
+            <section className="w-full flex items-center justify-center gap-8">
+              <CircularProgressBar percentage={savingPerc} />
+
+              <div className="text-violet-600 dark:text-white p-4 rounded-md flex items-center">
+                {savingSize > 0 ? "-" : "+"}
+
+                <span className="text-3xl px-2">
+                  {formatFileSize(Math.abs(savingSize)).split(" ")?.[0]}
+                </span>
+
+                {formatFileSize(savingSize).split(" ")?.[1]}
+              </div>
             </section>
           )}
 
-          {(uploadedFile || compressedFile) && (
+          {uploadedFile && compressedFile && (
             <ImageCompare
+              className="mt-8"
               beforeImgSrc={
                 uploadedFile
                   ? `data:${uploadedFile?.type};base64,${uploadedFile?.base64}`
