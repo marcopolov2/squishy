@@ -10,6 +10,7 @@ import { IImage } from "@/models/data";
 import Card from "./Card";
 import Button from "./Button";
 import CircularProgressBar from "./CircularProgressBar";
+import clsx from "clsx";
 
 const Home = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -19,7 +20,7 @@ const Home = () => {
 
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [quality, setQuality] = useState<number>(80);
+  const [quality, setQuality] = useState<number>(20);
 
   const beforeSize: number = getSizeInKB(uploadedFile?.size);
   const afterSize: number = getSizeInKB(compressedFile?.size);
@@ -32,7 +33,7 @@ const Home = () => {
       setFile(selectedFile);
       setUploadedFile(null);
       setCompressedFile(null);
-      setQuality(80);
+      setQuality(20);
     }
   };
 
@@ -96,7 +97,7 @@ const Home = () => {
       <ThemeToggle className="h-7 w-36 mb-4 ml-auto" />
 
       <FileDragUpload
-        className="h-40 w-full"
+        className="w-full"
         file={file}
         handleFileChange={handleFileChange}
       />
@@ -113,32 +114,6 @@ const Home = () => {
       )}
 
       {error && <div className="text-red-500">{error}</div>}
-
-      <section className="flex gap-8 w-full justify-center my-8 flex-col xs:flex-row">
-        {uploadedFile && (
-          <ImageCard
-            className="flex-1"
-            heading="Original"
-            image={{
-              ...uploadedFile,
-              base64: `data:${uploadedFile?.type};base64,${uploadedFile?.base64}`,
-              size: formatFileSize(beforeSize),
-            }}
-          />
-        )}
-
-        {compressedFile && (
-          <ImageCard
-            className="flex-1"
-            heading="Compressed"
-            image={{
-              ...compressedFile,
-              base64: `data:${compressedFile?.type};base64,${compressedFile?.base64}`,
-              size: formatFileSize(afterSize),
-            }}
-          />
-        )}
-      </section>
 
       {uploadedFile && (
         <Card headingClassName="text-center" className="w-full">
@@ -157,30 +132,58 @@ const Home = () => {
                 isLoading={uploading}
                 intent="secondary"
                 onClick={handleCompressImage}
-                className="my-8 min-w-44"
+                className="my-8"
               >
-                {uploading ? "Compressing..." : "Compress Image"}
+                {uploading ? "Compressing..." : "Compress"}
               </Button>
             </section>
           )}
 
-          {uploadedFile && compressedFile && (
-            <section className="w-full flex items-center justify-center gap-8">
-              <CircularProgressBar percentage={savingPerc} />
-              <div
-                title="Original vs. Compressed Size"
-                className="text-violet-600 dark:text-white p-4 rounded-md flex items-center"
+          <section className="flex gap-8 w-full justify-center my-4 flex-col xs:flex-row">
+            {uploadedFile && (
+              <ImageCard
+                className={clsx(
+                  "relative",
+                  compressedFile ? "flex-1" : "w-1/2"
+                )}
+                heading="Original"
+                image={{
+                  ...uploadedFile,
+                  base64: `data:${uploadedFile?.type};base64,${uploadedFile?.base64}`,
+                  size: formatFileSize(beforeSize),
+                }}
+              />
+            )}
+
+            {compressedFile && (
+              <ImageCard
+                className="flex-1 relative"
+                heading="Compressed"
+                image={{
+                  ...compressedFile,
+                  base64: `data:${compressedFile?.type};base64,${compressedFile?.base64}`,
+                  size: formatFileSize(afterSize),
+                }}
               >
-                {savingSize > 0 ? "-" : "+"}
+                {uploadedFile && compressedFile && (
+                  <section className="grid grid-cols-2 gap-8 place-items-center mt-8 mb-16">
+                    <CircularProgressBar percentage={savingPerc} />
 
-                <span className="text-3xl px-2">
-                  {formatFileSize(Math.abs(savingSize)).split(" ")?.[0]}
-                </span>
+                    <div className="dark:text-white rounded-md flex items-center justify-center">
+                      {savingSize > 0 ? "-" : "+"}
 
-                {formatFileSize(savingSize).split(" ")?.[1]}
-              </div>
-            </section>
-          )}
+                      <span className="text-3xl px-2">
+                        {formatFileSize(Math.abs(savingSize)).split(" ")?.[0]}
+                      </span>
+
+                      <span>{formatFileSize(savingSize).split(" ")?.[1]}</span>
+                    </div>
+                  </section>
+                )}
+              </ImageCard>
+            )}
+          </section>
+
           {uploadedFile && compressedFile && (
             <ImageCompare
               className="mt-8"

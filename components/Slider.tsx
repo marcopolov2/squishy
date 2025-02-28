@@ -55,7 +55,7 @@ const Slider: React.FC<FileDragUploadProps> = ({
     <div
       className={clsx(
         "slider",
-        "my-8 flex gap-3 flex-col items-center mx-auto",
+        "flex gap-3 flex-col items-center mx-auto",
         className
       )}
       style={{ touchAction: "none" }}

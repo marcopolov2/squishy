@@ -22,15 +22,15 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type="button"
       className={clsx(
-        "relative inline-flex shadow-md select-none items-center gap-1.5 rounded-md px-2.5 py-1.5 font-medium transition-all hover:cursor-pointer disabled:opacity-50 disabled:hover:cursor-not-allowed",
+        "shadow-md select-none items-center gap-1.5 rounded-md px-2.5 py-1.5 font-medium transition-all hover:cursor-pointer disabled:opacity-50 disabled:hover:cursor-not-allowed",
         intent === "primary"
-          ? "border-none bg-blue-400 text-white text-xs hover:bg-blue-400 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 active:bg-blue-400 disabled:hover:bg-blue-400"
+          ? "border-none bg-gray-500 text-white text-xs hover:bg-blue-400 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 active:bg-blue-400 disabled:hover:bg-blue-400"
           : "",
         intent === "secondary"
           ? "bg-[#f35c0b] text-white text-lg hover:bg-[#e68f60] disabled:hover:bg-[#e68f60] px-4 py-2 "
           : "",
 
-        isLoading ? "pointer-events-none" : "",
+        isLoading ? "pointer-events-none relative inline-flex" : "",
         className
       )}
       disabled={disabled || isLoading}

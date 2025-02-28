@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import Image from "next/image";
 import Card from "./Card";
 import { formatDate } from "@/utils/utility";
@@ -17,9 +17,15 @@ interface ImageCardProps {
 
   heading?: string;
   className?: string;
+  children?: ReactNode;
 }
 
-const ImageCard: React.FC<ImageCardProps> = ({ image, heading, className }) => {
+const ImageCard: React.FC<ImageCardProps> = ({
+  image,
+  heading,
+  className,
+  children,
+}) => {
   const handleDownload = () => {
     if (image?.base64) {
       // Create an anchor element to trigger the download
@@ -38,7 +44,7 @@ const ImageCard: React.FC<ImageCardProps> = ({ image, heading, className }) => {
       className={className}
       headingClassName="text-center"
     >
-      <div className="relative h-32 md:h-80">
+      <div className="relative h-32 md:h-32">
         <Image
           src={image?.base64 || ""}
           alt=""
@@ -48,32 +54,38 @@ const ImageCard: React.FC<ImageCardProps> = ({ image, heading, className }) => {
       </div>
 
       <div className="mt-4 text-sm">
-        <p>
+        <p className="grid grid-cols-2">
           <span className="font-medium">Uploaded At:</span>{" "}
           {formatDate(image?.uploadedAt, "DD-MM-YYYY")}
         </p>
-        <p>
+        <p className="grid grid-cols-2">
           <span className="font-medium">Name:</span> {image?.name}
         </p>
-        <p>
+        <p className="grid grid-cols-2">
           <span className="font-medium">Type:</span> {image?.type}
         </p>
 
-        <p>
+        <p className="grid grid-cols-2">
           <span className="font-medium">Dimensions:</span> {image?.width}
           {" x "}
           {image?.height}
         </p>
 
-        <span className="font-medium">Size: </span>
-        {image?.size}
+        <span className="font-medium grid grid-cols-2">
+          <span>Size:</span>
+          <span>{image?.size}</span>
+        </span>
       </div>
 
-      <section className="w-full flex justify-end">
-        <Button onClick={handleDownload} intent="primary" className="my-4">
-          Download
-        </Button>
-      </section>
+      {children}
+
+      <Button
+        onClick={handleDownload}
+        intent="primary"
+        className="m-2 absolute bottom-4 right-4"
+      >
+        Download
+      </Button>
     </Card>
   );
 };
