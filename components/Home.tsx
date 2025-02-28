@@ -32,7 +32,7 @@ const Home = () => {
       setFile(selectedFile);
       setUploadedFile(null);
       setCompressedFile(null);
-      setQuality(50);
+      setQuality(80);
     }
   };
 
@@ -84,13 +84,14 @@ const Home = () => {
       if (!data?.base64) throw new Error("Invalid response from server.");
 
       setCompressedFile(data);
-      console.log("File compressed successfully:", data);
     } catch (error) {
       setError(error.response?.data?.error || "Error compressing image.");
     } finally {
       setUploading(false);
     }
   };
+
+  console.log(uploadedFile);
 
   return (
     <div className="scroll-smooth flex flex-col items-center w-full gap-4">

@@ -8,6 +8,8 @@ interface ImageCardProps {
   image?: {
     name?: string;
     type?: string;
+    width?: number;
+    height?: number;
     size?: string;
     uploadedAt?: string;
     base64?: string;
@@ -56,10 +58,15 @@ const ImageCard: React.FC<ImageCardProps> = ({ image, heading, className }) => {
         <p>
           <span className="font-medium">Type:</span> {image?.type}
         </p>
+
         <p>
-          <span className="font-medium">Size: </span>
-          {image?.size}
+          <span className="font-medium">Dimensions:</span> {image?.width}
+          {" x "}
+          {image?.height}
         </p>
+
+        <span className="font-medium">Size: </span>
+        {image?.size}
       </div>
 
       <section className="w-full flex justify-end">

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
+import sharp from "sharp"; // Import sharp for image processing
 
 const jsonFilePath = path.join(process.cwd(), "DB_IMAGES.json");
 
@@ -32,7 +33,7 @@ export async function POST(req: Request) {
 }
 
 /**
- * Retrieves the uploaded file, converts it to Base64, and returns metadata with the Base64 string.
+ * Retrieves the uploaded file, converts it to Base64, and returns metadata with dimensions.
  */
 const getFileAsBase64 = async (req: Request) => {
   const formData = await req.formData();
@@ -43,15 +44,31 @@ const getFileAsBase64 = async (req: Request) => {
   // Create a unique file name for storing the file
   const fileId = uuidv4();
 
-  // Convert the file to a Base64 string
+  // Convert the file to a Buffer
   const fileBuffer = Buffer.from(await file.arrayBuffer());
   const base64Data = fileBuffer.toString("base64");
+
+  // Extract image dimensions if it's an image
+  let width = null;
+  let height = null;
+
+  if (file.type.startsWith("image/")) {
+    try {
+      const metadata = await sharp(fileBuffer).metadata();
+      width = metadata.width;
+      height = metadata.height;
+    } catch (error) {
+      console.error("Error extracting image dimensions:", error);
+    }
+  }
 
   return {
     id: fileId,
     name: file.name,
     type: file.type,
     size: file.size,
+    width,
+    height,
     base64: base64Data, // Store the Base64 encoded data in the JSON
     uploadedAt: new Date().toISOString(),
   };
