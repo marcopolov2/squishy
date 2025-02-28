@@ -1,17 +1,9 @@
-# 🏆 Squishy - File Compression App
-
-Squishy is a **Next.js** web application designed to **compress images** efficiently using **Sharp**.  
-It features a **modern UI** built with **Tailwind CSS** and leverages **Next.js API routes** for backend processing.
-
----
-
-## 📷 **Preview**
-
-<!-- Replace with actual logo if available -->
-
 ![Squishy Logo](./app//public/icon.ico)
 
 ---
+
+Squishy is a **Next.js** web application designed to **compress images** efficiently using **Sharp**.  
+It features a **modern UI** built with **Tailwind CSS** and leverages **Next.js API routes** for backend processing.
 
 ## 🚀 **Features**
 
@@ -22,26 +14,25 @@ It features a **modern UI** built with **Tailwind CSS** and leverages **Next.js 
 ✅ **Server-side processing** with **Next.js API Routes**  
 ✅ **Containerized with Docker** for easy deployment
 
----
-
-## 🛠️ **Tech Stack**
-
-| Technology       | Description                                |
-| ---------------- | ------------------------------------------ |
-| **Next.js**      | React-based framework for SSR & API routes |
-| **Tailwind CSS** | Utility-first CSS framework for styling    |
-| **Sharp**        | High-performance image processing library  |
-| **Docker**       | Containerization for easy deployment       |
-
----
-
 ## 🎯 **Getting Started**
 
 Follow these steps to run Squishy locally.
 
-### **1️⃣ Clone the Repository**
+### Clone the Repository\*\*
 
 ```bash
-git clone https://github.com/yourusername/squishy.git
+git clone https://github.com/marcopolov2/squishy.git
 cd squishy
+```
+
+### Build Docker Image
+
+```bash
+docker build -t my-react-app .
+```
+
+### Run Docker Container
+
+```bash
+docker run -p 3000:3000 my-next-app
 ```
