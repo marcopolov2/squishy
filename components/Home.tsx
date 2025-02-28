@@ -91,8 +91,6 @@ const Home = () => {
     }
   };
 
-  console.log(uploadedFile);
-
   return (
     <div className="scroll-smooth flex flex-col items-center w-full gap-4">
       <ThemeToggle className="h-7 w-36 mb-4 ml-auto" />
