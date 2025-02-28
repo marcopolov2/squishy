@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
 import Image from "next/image";
 import Card from "./Card";
-import { formatDate } from "@/utils/utility";
-import Button from "./Button";
+import Utils from "@/utils/general/utils";
+import downloadIcon from "../app/public/download.svg";
 
 interface ImageCardProps {
   image?: {
@@ -55,7 +55,7 @@ const ImageCard: React.FC<ImageCardProps> = ({
       <div className="mt-4 text-sm">
         <p className="grid grid-cols-2">
           <span className="font-medium">Uploaded At:</span>{" "}
-          {formatDate(image?.uploadedAt, "DD-MM-YYYY")}
+          {Utils.formatDate(image?.uploadedAt, "DD-MM-YYYY")}
         </p>
         <p className="grid grid-cols-2">
           <span className="font-medium">Name:</span> {image?.name}
@@ -78,13 +78,12 @@ const ImageCard: React.FC<ImageCardProps> = ({
 
       {children}
 
-      <Button
+      <Image
+        src={downloadIcon}
+        alt="Download"
+        className="m-2 absolute bottom-4 right-4 w-8 h-8 cursor-pointer"
         onClick={handleDownload}
-        intent="primary"
-        className="m-2 absolute bottom-4 right-4"
-      >
-        Download
-      </Button>
+      />
     </Card>
   );
 };

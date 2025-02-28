@@ -67,12 +67,28 @@ export const ImageCompare: React.FC<SliderProps> = ({
         onTouchStart={handleInteractionStart}
         style={{ touchAction: "none" }}
       >
-        {afterImgSrc && <Image src={afterImgSrc} alt="" fill priority />}
+        {afterImgSrc && (
+          <Image
+            src={afterImgSrc}
+            alt=""
+            fill
+            priority
+            style={{ objectFit: "cover" }}
+          />
+        )}
         <div
           className="absolute top-0 left-0 right-0 w-full aspect-[70/45] m-auto overflow-hidden select-none"
           style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
         >
-          {beforeImgSrc && <Image src={beforeImgSrc} fill priority alt="" />}
+          {beforeImgSrc && (
+            <Image
+              src={beforeImgSrc}
+              fill
+              priority
+              alt=""
+              style={{ objectFit: "cover" }}
+            />
+          )}
         </div>
         <div
           className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize"

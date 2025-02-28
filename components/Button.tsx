@@ -22,12 +22,9 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type="button"
       className={clsx(
-        "shadow-md select-none items-center gap-1.5 rounded-md px-2.5 py-1.5 font-medium transition-all hover:cursor-pointer disabled:opacity-50 disabled:hover:cursor-not-allowed",
+        "shadow-md select-none justify-center items-center gap-1.5 rounded-md px-2.5 py-1.5 font-medium hover:opacity-85 transition-all hover:cursor-pointer disabled:opacity-50 disabled:hover:cursor-not-allowed",
         intent === "primary"
           ? "border-none bg-gray-500 text-white text-xs hover:bg-blue-400 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 active:bg-blue-400 disabled:hover:bg-blue-400"
-          : "",
-        intent === "secondary"
-          ? "bg-[#f35c0b] text-white text-lg hover:bg-[#e68f60] disabled:hover:bg-[#e68f60] px-4 py-2"
           : "",
         intent === "color"
           ? "bg-gradient-to-r from-blue-300 via-purple-400 to-pink-400 animate-gradient-x text-white text-lg px-4 py-2"

@@ -1,12 +1,9 @@
-import { getCompressionOptions } from "@/utils/images/utils";
 import { NextResponse } from "next/server";
 import { FILE_TYPES } from "../../../utils/images/constants";
 import sharp from "sharp";
 
-// takes file and returns compressed version
 export async function POST(req: Request) {
   try {
-    // Parse the incoming form data
     const formData = await req.formData();
     const file = formData.get("file") as File | null;
 
@@ -27,22 +24,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const quality = Number(formData.get("quality"));
-
-    // Get the compression function for the given file type and quality
-    const compress = getCompressionOptions(fileType, quality);
-
-    if (!compress) {
-      return NextResponse.json(
-        { error: "Unsupported file type" },
-        { status: 400 }
-      );
-    }
-
-    // Convert the file to a buffer
     const fileBuffer = Buffer.from(await file.arrayBuffer());
-
-    // Extract image dimensions
     let width: number | null = null;
     let height: number | null = null;
 
@@ -54,13 +36,19 @@ export async function POST(req: Request) {
       console.error("Error extracting image dimensions:", error);
     }
 
-    // Compress the file using the selected compression function
+    const quality = Number(formData.get("quality"));
+    const compress = getCompressionOptions(fileType, quality, width, height);
+
+    if (!compress) {
+      return NextResponse.json(
+        { error: "Unsupported file type" },
+        { status: 400 }
+      );
+    }
+
     const compressedBuffer = await compress(fileBuffer);
-
-    // Convert the compressed buffer to base64 for easier transmission
     const base64Data = compressedBuffer.toString("base64");
-
-    return NextResponse.json({
+    const fileData = {
       name: file.name,
       size: compressedBuffer.length,
       type: `image/${fileType}`,
@@ -68,7 +56,9 @@ export async function POST(req: Request) {
       height,
       base64: base64Data,
       uploadedAt: new Date().toISOString(),
-    });
+    };
+
+    return NextResponse.json({ fileData });
   } catch (error) {
     return NextResponse.json(
       { error: (error as Error).message },
@@ -76,3 +66,56 @@ export async function POST(req: Request) {
     );
   }
 }
+
+// Compress file
+export const getCompressionOptions = (
+  type: string,
+  quality: number,
+  width: number,
+  height: number
+) => {
+  const options: { [key: string]: (buffer: Buffer) => Promise<Buffer> } = {
+    jpeg: (buffer) =>
+      sharp(buffer)
+        .resize({ width, height, fit: "fill" })
+        .jpeg({ quality })
+        .toBuffer(),
+    png: (buffer) =>
+      sharp(buffer)
+        .resize({ width, height, fit: "fill" })
+        .png({ quality })
+        .toBuffer(),
+    webp: (buffer) =>
+      sharp(buffer)
+        .resize({ width, height, fit: "fill" })
+        .webp({ quality })
+        .toBuffer(),
+    tiff: (buffer) =>
+      sharp(buffer)
+        .resize({ width, height, fit: "fill" })
+        .tiff({ quality })
+        .toBuffer(),
+    avif: (buffer) =>
+      sharp(buffer)
+        .resize({ width, height, fit: "fill" })
+        .avif({ quality, effort: 3 })
+        .toBuffer(),
+    heif: (buffer) =>
+      sharp(buffer)
+        .resize({ width, height, fit: "fill" })
+        .heif({ quality })
+        .toBuffer(),
+    jp2: (buffer) =>
+      sharp(buffer)
+        .resize({ width, height, fit: "fill" })
+        .jp2({ quality })
+        .toBuffer(),
+    jxl: (buffer) =>
+      sharp(buffer)
+        .resize({ width, height, fit: "fill" })
+        .jxl({ quality })
+        .toBuffer(),
+  };
+
+  return options[type] || null;
+};

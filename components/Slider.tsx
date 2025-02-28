@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
-import Utils from "@/utils/utility";
+import Utils from "@/utils/general/utils";
 
 interface FileDragUploadProps {
   setValue: (value: number) => void;
@@ -42,7 +42,6 @@ const Slider: React.FC<FileDragUploadProps> = ({
 
   const handleChange = (val) => {
     _setValue(val);
-    // @ts-expect-error: Suppress the expected 0 arguments error
     debounceSetter(val);
   };
 
@@ -64,7 +63,7 @@ const Slider: React.FC<FileDragUploadProps> = ({
     >
       <label
         htmlFor="quality"
-        className="block mb-8 text-xl font-medium text-gray-900 dark:text-white"
+        className="block mb-8 text-xl font-medium text-gray-500 dark:text-white"
       >
         {label} {_value}
       </label>

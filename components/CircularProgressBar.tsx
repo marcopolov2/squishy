@@ -15,35 +15,33 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (progress / 100) * circumference;
+  const perc = Math.abs(progress).toFixed(0);
 
   useEffect(() => {
     let start: number;
     let animationFrameId: number;
     const animateProgress = (timestamp: number) => {
-      if (!start) start = timestamp; // Record the starting timestamp
-      const progressDuration = 1000; // Animation duration (1 second)
+      if (!start) start = timestamp;
+      const progressDuration = 1000;
       const elapsed = timestamp - start;
 
       const newProgress = Math.min(
-        (elapsed / progressDuration) * percentage, // Calculate new progress
-        percentage // Ensure progress does not exceed the target percentage
+        (elapsed / progressDuration) * percentage,
+        percentage
       );
       setProgress(newProgress);
 
-      // Continue animation if the progress is not yet complete
       if (elapsed < progressDuration) {
         animationFrameId = requestAnimationFrame(animateProgress);
       }
     };
 
-    // Start the animation
     animationFrameId = requestAnimationFrame(animateProgress);
 
-    // Cleanup the animation on component unmount or when percentage changes
     return () => {
-      cancelAnimationFrame(animationFrameId); // Stop the animation if percentage changes or component unmounts
+      cancelAnimationFrame(animationFrameId);
     };
-  }, [percentage]); // Runs when the percentage value changes
+  }, [percentage]);
 
   return (
     <section title="Original vs. Compressed Size">
@@ -82,7 +80,7 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
           className="dark:fill-white fill-[#f35c0b]"
           fontSize="1.5625rem"
         >
-          {progress > 0 ? "-" : "+"} {Math.abs(progress).toFixed(0)}%
+          {Number(perc) > 0 ? "-" : Number(perc) === 0 ? "" : "+"} {perc}%
         </text>
       </svg>
     </section>
