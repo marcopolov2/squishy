@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import FileDragUpload from "./FileDragUpload";
 import { ImageCompare } from "./ImageCompare";
 import Slider from "./Slider";
@@ -13,6 +13,7 @@ import { _compressFile, _uploadFile } from "../utils/api/actions";
 import Utils from "@/utils/general/utils";
 
 const Home = () => {
+  const imageCompareRef = useRef(null);
   const [file, setFile] = useState<File | null>(null);
 
   const [uploadedFile, setUploadedFile] = useState<IImage | null>(null);
@@ -28,6 +29,14 @@ const Home = () => {
   const savingPerc: number = (savingSize / beforeSize) * 100;
   const savingPercFormat = Utils.getFileSize(Math.abs(savingSize)).split(" ");
   const savingSizing = Utils.getFileSize(savingSize).split(" ");
+
+  const scrollToCompare = () => {
+    imageCompareRef?.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "center",
+    });
+  };
 
   const handleFileChange = (file) => {
     setFile(file);
@@ -55,6 +64,7 @@ const Home = () => {
     setError(error || "");
     setCompressedFile(error ? null : fileData);
     setUploading(false);
+    scrollToCompare();
   };
 
   return (
@@ -68,10 +78,11 @@ const Home = () => {
           headingClassName="text-center"
           className="w-full flex justify-center flex-col items-center gap-3"
         >
-          <div>File: {file.name}</div>
+          <div> {file.name}</div>
           <Button
             intent="color"
             className="w-1/3 min-w-60"
+            showLoader
             disabled={uploading}
             isLoading={uploading}
             onClick={handleUpload}
@@ -96,11 +107,13 @@ const Home = () => {
               disabled={uploading}
             />
           )}
+
           {uploadedFile && (
-            <section className="w-full flex justify-center">
+            <section className="w-full flex justify-center my-12">
               <Button
                 intent="color"
-                className="my-12 w-1/3 min-w-60"
+                className="w-full sm:min-w-60"
+                showLoader={false}
                 isLoading={uploading}
                 disabled={uploading}
                 onClick={handleCompress}
@@ -146,7 +159,7 @@ const Home = () => {
                       <span className="text-3xl px-2">
                         {savingPercFormat[0]}
                       </span>
-                      <span className="text-orange-400">{savingSizing[1]}</span>
+                      <span className="text-[#e3901c]">{savingSizing[1]}</span>
                     </div>
                   </section>
                 )}
@@ -156,6 +169,7 @@ const Home = () => {
 
           {uploadedFile && compressedFile && (
             <ImageCompare
+              ref={imageCompareRef}
               className="mt-8"
               beforeImgSrc={
                 uploadedFile

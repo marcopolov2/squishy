@@ -61,7 +61,7 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
         />
         <circle
           className="circle-progress"
-          stroke="#f35c0b"
+          stroke="#e3901c"
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           fill="none"
@@ -77,7 +77,7 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
           y="50%"
           textAnchor="middle"
           dy=".3em"
-          className="dark:fill-white fill-[#f35c0b]"
+          className="dark:fill-white fill-[#e3901c]"
           fontSize="1.5625rem"
         >
           {Number(perc) > 0 ? "-" : Number(perc) === 0 ? "" : "+"} {perc}%

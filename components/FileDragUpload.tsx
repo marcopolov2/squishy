@@ -60,6 +60,7 @@ const FileDragUpload: React.FC<FileDragUploadProps> = ({
   };
 
   const handleFilePicked = (file) => {
+    if (!file) return;
     setError(null);
     validateFile(file);
   };

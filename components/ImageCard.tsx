@@ -72,7 +72,7 @@ const ImageCard: React.FC<ImageCardProps> = ({
 
         <span className="font-medium grid grid-cols-2">
           <span>Size:</span>
-          <span className="text-orange-400">{image?.size}</span>
+          <span className="text-[#e3901c]">{image?.size}</span>
         </span>
       </div>
 

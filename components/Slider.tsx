@@ -38,7 +38,7 @@ const Slider: React.FC<FileDragUploadProps> = ({
     value: number | string
   ) => {
     const progress = (Number(value) / parseFloat(slider.max)) * 100;
-    slider.style.background = `linear-gradient(to right, #e4793f ${progress}%, #ccc ${progress}%)`;
+    slider.style.background = `linear-gradient(to right, #e3901c ${progress}%, #ccc ${progress}%)`;
   };
 
   const handleChange = (val) => {
@@ -64,7 +64,7 @@ const Slider: React.FC<FileDragUploadProps> = ({
     >
       <label
         htmlFor="quality"
-        className="block mb-8 text-xl font-medium text-gray-500 dark:text-white"
+        className="flex gap-2 flex-col items-center mb-8 text-xl font-medium text-gray-500 dark:text-white"
       >
         {label} {_value}
       </label>
