@@ -2,12 +2,12 @@ import { ReactNode } from "react";
 import "../styles/global.css";
 import Theme from "@/theme-provider";
 import Image from "next/image";
-import logo from "./icon.ico";
+import logo from "./public/icon.ico";
 
 export const metadata = {
   title: "Squishi",
   description: "Squish your images smaller",
-  icons: { icon: "/icon.ico" },
+  icons: { icon: "/public/icon.ico" },
 };
 
 export default function Layout({ children }: { children: ReactNode }) {

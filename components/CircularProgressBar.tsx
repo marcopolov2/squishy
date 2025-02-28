@@ -46,44 +46,46 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
   }, [percentage]); // Runs when the percentage value changes
 
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox={`0 0 ${size} ${size}`}
-      className="circular-progress-bar"
-    >
-      <circle
-        className="circle-bg"
-        strokeWidth={strokeWidth}
-        fill="none"
-        cx={size / 2}
-        cy={size / 2}
-        r={radius}
-      />
-      <circle
-        className="circle-progress"
-        stroke="#9333ea"
-        strokeWidth={strokeWidth}
-        strokeLinecap="round"
-        fill="none"
-        cx={size / 2}
-        cy={size / 2}
-        r={radius}
-        strokeDasharray={circumference}
-        strokeDashoffset={offset}
-        transform={`rotate(-90 ${size / 2} ${size / 2})`}
-      />
-      <text
-        x="50%"
-        y="50%"
-        textAnchor="middle"
-        dy=".3em"
-        className="dark:fill-white fill-[#9333ea]"
-        fontSize="1.5625rem"
+    <section title="Original vs. Compressed Size">
+      <svg
+        width={size}
+        height={size}
+        viewBox={`0 0 ${size} ${size}`}
+        className="circular-progress-bar"
       >
-        {progress > 0 ? "-" : "+"} {Math.abs(progress).toFixed(0)}%
-      </text>
-    </svg>
+        <circle
+          className="circle-bg"
+          strokeWidth={strokeWidth}
+          fill="none"
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+        />
+        <circle
+          className="circle-progress"
+          stroke="#9333ea"
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+          fill="none"
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+          transform={`rotate(-90 ${size / 2} ${size / 2})`}
+        />
+        <text
+          x="50%"
+          y="50%"
+          textAnchor="middle"
+          dy=".3em"
+          className="dark:fill-white fill-[#9333ea]"
+          fontSize="1.5625rem"
+        >
+          {progress > 0 ? "-" : "+"} {Math.abs(progress).toFixed(0)}%
+        </text>
+      </svg>
+    </section>
   );
 };
 

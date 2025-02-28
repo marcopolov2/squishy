@@ -85,7 +85,7 @@ const Home = () => {
 
       setCompressedFile(data);
       console.log("File compressed successfully:", data);
-    } catch (error: any) {
+    } catch (error) {
       setError(error.response?.data?.error || "Error compressing image.");
     } finally {
       setUploading(false);
@@ -115,7 +115,7 @@ const Home = () => {
 
       {error && <div className="text-red-500">{error}</div>}
 
-      <section className="flex gap-8 w-full justify-center my-8">
+      <section className="flex gap-8 w-full justify-center my-8 flex-col xs:flex-row">
         {uploadedFile && (
           <ImageCard
             className="flex-1"
@@ -152,7 +152,6 @@ const Home = () => {
               setValue={setQuality}
             />
           )}
-
           {uploadedFile && (
             <section className="w-full flex justify-center">
               <Button
@@ -166,11 +165,17 @@ const Home = () => {
             </section>
           )}
 
+          <section className="text-center w-full my-2">
+            Image File Comparison
+          </section>
+
           {uploadedFile && compressedFile && (
             <section className="w-full flex items-center justify-center gap-8">
               <CircularProgressBar percentage={savingPerc} />
-
-              <div className="text-violet-600 dark:text-white p-4 rounded-md flex items-center">
+              <div
+                title="Original vs. Compressed Size"
+                className="text-violet-600 dark:text-white p-4 rounded-md flex items-center"
+              >
                 {savingSize > 0 ? "-" : "+"}
 
                 <span className="text-3xl px-2">
@@ -181,7 +186,6 @@ const Home = () => {
               </div>
             </section>
           )}
-
           {uploadedFile && compressedFile && (
             <ImageCompare
               className="mt-8"

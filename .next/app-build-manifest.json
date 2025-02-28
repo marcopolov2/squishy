@@ -1,15 +1,13 @@
 {
   "pages": {
     "/compress/page": [
-      "static/chunks/_d16388._.js",
-      "static/chunks/app_icon_ico_mjs_1e24bf._.js",
       "static/chunks/styles_9a55e7._.css",
-      "static/chunks/node_modules_b6bd34._.js",
+      "static/chunks/node_modules_9e024a._.js",
       "static/chunks/_0a8355._.js",
       "static/chunks/app_layout_tsx_61af54._.js",
       "static/chunks/node_modules_1cbcb8._.js",
       "static/chunks/_904df8._.js",
-      "static/chunks/app_compress_page_tsx_e35420._.js",
+      "static/chunks/app_compress_page_tsx_607599._.js",
       "static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc._.js",
       "static/chunks/node_modules_next_dist_compiled_107ce8._.js",
       "static/chunks/node_modules_next_dist_client_523921._.js",

@@ -85,6 +85,6 @@ const readStoredFiles = () => {
 /**
  * Writes updated stored files back to the DB_IMAGES.json file.
  */
-const writeStoredFiles = (data: any) => {
+const writeStoredFiles = (data) => {
   fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
 };

@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { FILE_TYPES } from "@/utils/images/constants";
 
 interface FileDragUploadProps {
-  handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleFileChange: (event) => void;
   file: File | null;
   className?: string;
 }

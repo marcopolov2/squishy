@@ -4,6 +4,9 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      screens: {
+        xs: "400px",
+      },
       colors: {
         violet: {
           50: "#faf5ff",
