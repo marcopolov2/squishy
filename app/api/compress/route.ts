@@ -68,7 +68,7 @@ export async function POST(req: Request) {
 }
 
 // Compress file
-export const getCompressionOptions = (
+const getCompressionOptions = (
   type: string,
   quality: number,
   width: number,

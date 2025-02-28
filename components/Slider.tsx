@@ -24,6 +24,7 @@ const Slider: React.FC<FileDragUploadProps> = ({
   const sliderEl = useRef<HTMLInputElement | null>(null);
   const [_value, _setValue] = useState(value);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceSetter = useCallback(
     Utils.debounce((value) => {
       setValue(value);
