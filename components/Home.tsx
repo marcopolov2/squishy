@@ -177,7 +177,9 @@ const Home = () => {
                         {formatFileSize(Math.abs(savingSize)).split(" ")?.[0]}
                       </span>
 
-                      <span>{formatFileSize(savingSize).split(" ")?.[1]}</span>
+                      <span className="text-orange-400">
+                        {formatFileSize(savingSize).split(" ")?.[1]}
+                      </span>
                     </div>
                   </section>
                 )}
