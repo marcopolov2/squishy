@@ -7,12 +7,12 @@ It features a **modern UI** built with **Tailwind CSS** and leverages **Next.js 
 
 ## 🚀 **Features**
 
-✅ **Lightning-fast image compression** using **Sharp**  
-✅ **Drag-and-drop file upload** for user convenience  
-✅ **Real-time compression preview**  
-✅ **Responsive UI** powered by **Tailwind CSS**  
-✅ **Server-side processing** with **Next.js API Routes**  
-✅ **Containerized with Docker** for easy deployment
+**Lightning-fast image compression** using **Sharp**  
+**Drag-and-drop file upload** for user convenience  
+**Real-time compression preview**  
+**Responsive UI** powered by **Tailwind CSS**  
+**Server-side processing** with **Next.js API Routes**  
+**Containerized with Docker** for easy deployment
 
 ## 🎯 **Getting Started**
 
@@ -22,6 +22,9 @@ Follow these steps to run Squishy locally.
 
 ```bash
 git clone https://github.com/marcopolov2/squishy.git
+```
+
+```bash
 cd squishy
 ```
 
