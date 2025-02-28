@@ -131,7 +131,8 @@ const Home = () => {
             <section className="w-full flex justify-center">
               <Button
                 isLoading={uploading}
-                intent="secondary"
+                // intent="secondary"
+                intent="color"
                 onClick={handleCompressImage}
                 className="my-8"
               >

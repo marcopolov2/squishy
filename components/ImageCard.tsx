@@ -28,13 +28,12 @@ const ImageCard: React.FC<ImageCardProps> = ({
 }) => {
   const handleDownload = () => {
     if (image?.base64) {
-      // Create an anchor element to trigger the download
       const link = document.createElement("a");
-      link.href = image.base64; // Set the href to the image source
-      link.download = image.name || "download"; // Set the download filename
-      document.body.appendChild(link); // Append the link to the body
-      link.click(); // Trigger the click to start the download
-      document.body.removeChild(link); // Clean up the link after download
+      link.href = image.base64;
+      link.download = image.name || "download";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 

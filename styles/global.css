@@ -1,6 +1,7 @@
 /* app/globals.css */
 
 @import url("./slider.css");
+@import url("./fileDragUpload.css");
 
 @tailwind base;
 @tailwind components;

@@ -42,7 +42,7 @@ const FileDragUpload: React.FC<FileDragUploadProps> = ({
   return (
     <div
       className={clsx(
-        "flex relative items-center p-8 justify-center rounded-md border-2 border-dashed border-gray-700 dark:border-white bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer",
+        "flex relative items-center p-8 justify-center rounded-md border-2 shadow-lg border-dashed border-white bg-gradient-to-r from-blue-300 via-purple-400 to-pink-400 animate-gradient-x cursor-pointer",
         className
       )}
       onDrop={handleDrop}
@@ -53,9 +53,7 @@ const FileDragUpload: React.FC<FileDragUploadProps> = ({
         className="flex flex-col w-full items-center cursor-pointer"
         onClick={(e) => e.stopPropagation()}
       >
-        <span className="text-gray-400 dark:text-gray-200">
-          Drag & Drop Files
-        </span>
+        <span className="text-white dark:text-gray-200">Drag & Drop Files</span>
 
         <input
           ref={fileInputRef}
@@ -66,11 +64,11 @@ const FileDragUpload: React.FC<FileDragUploadProps> = ({
         />
 
         {file ? (
-          <span className="text-[#e4793f] text-sm">{file.name}</span>
+          <span className="text-white text-sm">{file.name}</span>
         ) : (
-          <span className="text-gray-500 dark:text-gray-400 flex flex-col items-center">
+          <span className="text-white flex flex-col items-center">
             or click to select
-            <span className="text-sm">
+            <span className="text-sm text-gray-200">
               Support formats: {FILE_TYPES.join(", ")}
             </span>
           </span>
