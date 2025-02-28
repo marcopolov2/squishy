@@ -18,7 +18,7 @@ It features a **modern UI** built with **Tailwind CSS** and leverages **Next.js 
 
 Follow these steps to run Squishy locally.
 
-### Clone the Repository\*\*
+### Clone Repository
 
 ```bash
 git clone https://github.com/marcopolov2/squishy.git
@@ -27,6 +27,8 @@ git clone https://github.com/marcopolov2/squishy.git
 ```bash
 cd squishy
 ```
+
+## **1. Docker**
 
 ### Build Docker Image
 
@@ -38,4 +40,18 @@ docker build -t my-react-app .
 
 ```bash
 docker run -p 3000:3000 my-next-app
+```
+
+## **2. Local**
+
+### Install Dependencies
+
+```bash
+npm i
+```
+
+### Run
+
+```bash
+npm run dev
 ```
