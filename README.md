@@ -44,13 +44,9 @@ docker run -p 3000:3000 my-next-app
 
 ## **2. Local (optional)**
 
-### Install Dependencies
-
 ```bash
 npm i
 ```
-
-### Run
 
 ```bash
 npm run dev
