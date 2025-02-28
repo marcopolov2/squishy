@@ -124,6 +124,7 @@ const Home = () => {
               min={1}
               value={quality}
               setValue={setQuality}
+              disabled={uploading}
             />
           )}
           {uploadedFile && (

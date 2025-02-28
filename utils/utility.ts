@@ -24,3 +24,22 @@ export const formatFileSize = (sizeInKB: number): string => {
     return `${(sizeInKB / 1024 / 1024 / 1024).toFixed(2)} TB`;
   }
 };
+export default class Utils {
+  static debounce(func, wait) {
+    let timeout;
+    return function () {
+      const context = this,
+        args = arguments;
+
+      return new Promise(function (resolve) {
+        const later = function () {
+          timeout = null;
+          resolve(func.apply(context, args));
+        };
+
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      });
+    };
+  }
+}

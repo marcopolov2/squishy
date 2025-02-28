@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
+import Utils from "@/utils/utility";
 
 interface FileDragUploadProps {
   setValue: (value: number) => void;
@@ -8,6 +9,7 @@ interface FileDragUploadProps {
   max?: string | number;
   label: string;
   className?: string;
+  disabled?: boolean;
 }
 
 const Slider: React.FC<FileDragUploadProps> = ({
@@ -17,39 +19,39 @@ const Slider: React.FC<FileDragUploadProps> = ({
   max = 100,
   label,
   className,
+  disabled,
 }) => {
   const sliderEl = useRef<HTMLInputElement | null>(null);
-  const sliderValue = useRef<HTMLSpanElement | null>(null);
+  const [_value, _setValue] = useState(value);
 
-  // Function to update slider's background and thumb rotation
-  const updateSliderStyles = (slider: HTMLInputElement, value: number) => {
-    const progress = (value / parseFloat(slider.max)) * 100;
+  const debounceSetter = useCallback(
+    Utils.debounce((value) => {
+      setValue(value);
+    }, 550),
+    []
+  );
+
+  // Function to update slider's background
+  const updateSliderStyles = (
+    slider: HTMLInputElement,
+    value: number | string
+  ) => {
+    const progress = (Number(value) / parseFloat(slider.max)) * 100;
     slider.style.background = `linear-gradient(to right, #e4793f ${progress}%, #ccc ${progress}%)`;
   };
 
+  const handleChange = (val) => {
+    _setValue(val);
+    // @ts-expect-error: Suppress the expected 0 arguments error
+    debounceSetter(val);
+  };
+
+  // Sync slider background with the updated value
   useEffect(() => {
-    if (sliderEl.current && sliderValue.current) {
-      const slider = sliderEl.current;
-      const valueDisplay = sliderValue.current;
-
-      // Update value display and background when slider value changes
-      const updateSlider = (event: Event) => {
-        const tempSliderValue = (event.target as HTMLInputElement).value;
-        valueDisplay.textContent = tempSliderValue;
-        setValue(Number(tempSliderValue));
-        updateSliderStyles(slider, parseFloat(tempSliderValue));
-      };
-
-      slider.addEventListener("input", updateSlider);
-
-      // Initial slider style setup when component mounts
-      updateSliderStyles(slider, parseFloat(value as string));
-
-      return () => {
-        slider.removeEventListener("input", updateSlider);
-      };
+    if (sliderEl.current) {
+      updateSliderStyles(sliderEl.current, _value);
     }
-  }, [value]);
+  }, [_value]);
 
   return (
     <div
@@ -64,16 +66,18 @@ const Slider: React.FC<FileDragUploadProps> = ({
         htmlFor="quality"
         className="block mb-8 text-xl font-medium text-gray-900 dark:text-white"
       >
-        {label} <span ref={sliderValue}>{value}</span>
+        {label} {_value}
       </label>
 
       <input
         ref={sliderEl}
         type="range"
+        name="quality"
         min={min}
         max={max}
-        value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
+        disabled={disabled}
+        value={_value}
+        onChange={(e) => handleChange(e.target.value)}
       />
     </div>
   );
