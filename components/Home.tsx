@@ -40,6 +40,7 @@ const Home = () => {
 
   const handleFileChange = (file) => {
     setFile(file);
+    setError(null);
     setUploadedFile(null);
     setCompressedFile(null);
     setQuality(20);
