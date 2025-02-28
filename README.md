@@ -102,7 +102,3 @@ AI was used to enhance the existing features, assist in finding bugs, and help i
 1. Clone the repository and follow the setup instructions.
 2. Test the image compression feature by uploading various supported image formats.
 3. Ensure that the app is responsive across different screen sizes and works well on both desktop and mobile.
-
----
-
-Enjoy using Squishy for your image compression needs! For issues or suggestions, feel free to open an issue in the repository.
