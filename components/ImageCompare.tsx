@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import clsx from "clsx";
 
 interface SliderProps {
@@ -18,32 +18,36 @@ export const ImageCompare: React.FC<SliderProps> = ({
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleMove = (clientX: number, rect: DOMRect) => {
+  const handleMove = useCallback((clientX: number, rect: DOMRect) => {
     const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
     const percent = Math.max(0, Math.min((x / rect.width) * 100, 100));
     setSliderPosition(percent);
-  };
+  }, []);
 
-  const handleMouseMove = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    if (!isDragging) return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    handleMove(event.clientX, rect);
-  };
+  const handleMouseMove = useCallback(
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      if (!isDragging) return;
+      const rect = event.currentTarget.getBoundingClientRect();
+      handleMove(event.clientX, rect);
+    },
+    [isDragging, handleMove]
+  );
 
-  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
+  const handleTouchMove = useCallback(
+    (event: React.TouchEvent<HTMLDivElement>) => {
+      if (!isDragging) return;
 
-    const rect = event.currentTarget.getBoundingClientRect();
-    if (event.touches.length > 0) {
-      const touch = event.touches[0];
-      handleMove(touch.clientX, rect);
-    }
-  };
+      const rect = event.currentTarget.getBoundingClientRect();
+      if (event.touches.length > 0) {
+        const touch = event.touches[0];
+        handleMove(touch.clientX, rect);
+      }
+    },
+    [isDragging, handleMove]
+  );
 
-  const handleInteractionStart = () => setIsDragging(true);
-  const handleInteractionEnd = () => setIsDragging(false);
+  const handleInteractionStart = useCallback(() => setIsDragging(true), []);
+  const handleInteractionEnd = useCallback(() => setIsDragging(false), []);
 
   return (
     <div
