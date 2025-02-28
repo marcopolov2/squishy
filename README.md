@@ -28,7 +28,7 @@ git clone https://github.com/marcopolov2/squishy.git
 cd squishy
 ```
 
-## **1. Docker**
+## **1. Docker (optional)**
 
 ### Build Docker Image
 
@@ -42,7 +42,7 @@ docker build -t my-react-app .
 docker run -p 3000:3000 my-next-app
 ```
 
-## **2. Local**
+## **2. Local (optional)**
 
 ### Install Dependencies
 
