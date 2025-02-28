@@ -165,10 +165,6 @@ const Home = () => {
             </section>
           )}
 
-          <section className="text-center w-full my-2">
-            Image File Comparison
-          </section>
-
           {uploadedFile && compressedFile && (
             <section className="w-full flex items-center justify-center gap-8">
               <CircularProgressBar percentage={savingPerc} />
