@@ -13,7 +13,7 @@ Squishy is a **Next.js** web application designed to **compress images** using t
 - **Server-side processing** with **Next.js API Routes**
 - **Containerized with Docker** for easy deployment
 
-## 🎯 Getting Started
+## Getting Started
 
 Follow these steps to run Squishy locally.
 
@@ -59,7 +59,7 @@ npm run dev
 
 This will start the Next.js application locally on port `3000`. You can now access the app in your browser at `http://localhost:3000`.
 
-## 🔧 **Technologies Used**
+## **Technologies Used**
 
 - **Next.js** - Framework for building the app
 - **Tailwind CSS** - For a modern, responsive design
@@ -67,10 +67,10 @@ This will start the Next.js application locally on port `3000`. You can now acce
 - **Docker** - For easy deployment
 - **Next.js API Routes** - Backend image compression processing
 
-## ⚠️ **Assumptions & Limitations**
+##  **Assumptions & Limitations**
 
 1. **Single File Upload** - The app supports uploading and compressing one file at a time.
-2. **File Size Limitation** - The maximum file size supported for upload is **5MB**.
+2. **File Size Limitation** - The maximum file size supported for upload is **5MB**, since we store images locally. Larger image files may cause blocking the UI.
 3. **Restricted File Types**:
    - "png"
    - "jpg"
@@ -85,21 +85,22 @@ This will start the Next.js application locally on port `3000`. You can now acce
 5. **Speed** - Images are handled using base64 encoding, which is large for some images, causing slow response times.
 6. **Image Storage and Optimization** - Currently, images are stored locally as base64-encoded data, but in the future, images will be stored in a hosted database with direct links. This transition will significantly reduce the overhead associated with base64 encoding and improve performance.
    
-## 🤖 **AI Assistance**
+## **AI Assistance**
 
-AI was used to enhance the existing features, assist in finding bugs, and help in the testing and development of new functionalities. The AI was especially helpful in:
+The AI was used to:
 
-- Optimizing the image compression logic
-- Suggesting improvements to the UI and UX
-- Testing for bugs and edge cases
+- Optimizing the image compression logic on backend.
+- Translate css to tailwind utility classes.
+- Testing for bugs and edge cases.
+- ReadMe file (this syntax is weird haha)
 
-## 📝 **Architectural Decisions**
+## **Architectural Decisions**
 
-- **Sharp** was chosen for its high-performance image processing capabilities.
-- **Next.js API Routes** were used for server-side image compression to handle all processing efficiently and securely.
-- **Tailwind CSS** was used for styling to create a responsive and clean UI with minimal effort.
+- **Sharp** used as this it works in the node runtime environment, and after looking at some YT vids and reading onlnie articles, i could see its the de-facto for image compression in Node.
+- **Next.js API Routes** per spec.
+- **Tailwind CSS** for easy css integration (dont have to make seperate css files for each component).
 
-## ✅ **Testing the Application**
+## **Testing the Application**
 
 1. Clone the repository and follow the setup instructions.
 2. Test the image compression feature by uploading various supported image formats.
