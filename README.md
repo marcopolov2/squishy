@@ -82,7 +82,9 @@ This will start the Next.js application locally on port `3000`. You can now acce
    - "heif"
    - "jxl"
 4. **No Database Hosting** - Squishy does not currently use a hosted database, but a local JSON file.
-
+5. **Speed** - Images are handled using base64 encoding, which is large for some images, causing slow response times.
+6. **Image Storage and Optimization** - Currently, images are stored locally as base64-encoded data, but in the future, images will be stored in a hosted database with direct links. This transition will significantly reduce the overhead associated with base64 encoding and improve performance.
+   
 ## 🤖 **AI Assistance**
 
 AI was used to enhance the existing features, assist in finding bugs, and help in the testing and development of new functionalities. The AI was especially helpful in:
