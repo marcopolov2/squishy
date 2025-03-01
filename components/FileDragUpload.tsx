@@ -83,7 +83,7 @@ const FileDragUpload: React.FC<FileDragUploadProps> = ({
         onClick={triggerFileInput}
       >
         <label
-          className="flex flex-col w-full m-[0.5px] items-center cursor-pointer rounded-md p-8 bg-gradient-to-r from-blue-300 via-purple-400 to-pink-400 animate-gradient-x"
+          className="flex flex-col w-full m-[0.0313rem] items-center cursor-pointer rounded-md p-8 bg-gradient-to-r from-blue-300 via-purple-400 to-pink-400 animate-gradient-x"
           onClick={(e) => e.stopPropagation()}
         >
           <span className="text-white text-2xl mb-4">Drag & Drop Files</span>

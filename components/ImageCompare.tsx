@@ -87,7 +87,7 @@ export const ImageCompare = forwardRef<HTMLDivElement, SliderProps>(
         </div>
         <div
           ref={containerRef}
-          className="relative max-w-2xl max-h-[1000px] mx-auto overflow-hidden select-none"
+          className="relative max-w-2xl max-h-[62.5rem] mx-auto overflow-hidden select-none cursor-pointer"
           onMouseDown={handleInteractionStart}
           onTouchStart={handleInteractionStart}
           style={{
