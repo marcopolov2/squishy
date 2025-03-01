@@ -2,8 +2,6 @@
 
 ![Squishy Logo](./app//public/logo.svg)
 
-Squishy is a **Next.js** web application designed to **compress images** using the **Sharp** library. The app also uses **Tailwind CSS** and leverages **Next.js API routes** for backend processing.
-
 ## Features
 
 - **Image compression** using **Sharp**
