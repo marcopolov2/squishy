@@ -1,4 +1,4 @@
-# Squishy 
+
 
 ![Squishy Logo](./app//public/logo.svg)
 
