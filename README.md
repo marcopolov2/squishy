@@ -1,4 +1,4 @@
-# Squishy - Image Compression Made Easy
+# Squishy 
 
 ![Squishy Logo](./app//public/logo.svg)
 
