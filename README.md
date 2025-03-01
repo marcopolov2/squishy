@@ -84,7 +84,7 @@ This will start the Next.js application locally on port `3000`. You can now acce
 6. **Image Storage and Optimization** - Currently, images are stored locally as base64-encoded data, but in the future, images will be stored in a hosted database with direct links. This transition will significantly reduce the overhead associated with base64 encoding and improve performance.
 7. **Local File Storage** - Too many images uploaded causes massive local JSON file, as the base64 for each image is stored in the file.
    
-## **AI Assistance**
+## **AI Assistance (OpenAI ChatGPT free tier)**
 
 - Optimizing the image compression logic on backend using Sharp and file buffers.
 - Translate css to tailwind utility classes.
