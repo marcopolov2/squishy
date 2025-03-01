@@ -69,16 +69,7 @@ This will start the Next.js application locally on port `3000`. You can now acce
 
 1. **Single File Upload** - The app supports uploading and compressing one file at a time, as base64 handling is resource intense.
 2. **File Size Limitation** - The maximum file size supported for upload is **5MB**, since we store images locally. Larger image files may cause blocking the UI.
-3. **Restricted File Types**:
-   - "png"
-   - "jpg"
-   - "jpeg"
-   - "jp2"
-   - "webp"
-   - "tiff"
-   - "avif"
-   - "heif"
-   - "jxl"
+3. **Restricted File Types**: png, jpg, jpeg, jp2, webp, tiff, avif, heif, jxl.
 4. **No Database Hosting** - Squishy does not currently use a hosted database, but a local JSON file, to keep things simple.
 5. **Speed** - Images are handled using base64 encoding, which is large for images, causing possible slow response times.
 6. **Image Storage and Optimization** - Currently, images are stored locally as base64-encoded data, but in the future, images will be stored in a hosted database with direct links. This transition will significantly reduce the overhead associated with base64 encoding and improve performance.
