@@ -59,11 +59,11 @@ This will start the Next.js application locally on port `3000`. You can now acce
 
 ## **Technologies Used**
 
-- **Next.js** - Framework for building the app
-- **Tailwind CSS** - For a modern, responsive design
-- **Sharp** - Image compression and processing
-- **Docker** - For easy deployment
-- **Next.js API Routes** - Backend image compression processing
+- **Next.js** 
+- **Tailwind CSS**  
+- **Sharp** 
+- **Docker**  
+- **Next.js API Routes**  
 
 ##  **Assumptions & Limitations**
 
