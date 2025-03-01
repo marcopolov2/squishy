@@ -4,7 +4,6 @@ import Utils from "@/utils/general/utils";
 
 interface FileDragUploadProps {
   setValue: (value: number) => void;
-  value: string | number;
   min?: string | number;
   max?: string | number;
   label: string;
@@ -14,7 +13,6 @@ interface FileDragUploadProps {
 
 const Slider: React.FC<FileDragUploadProps> = ({
   setValue,
-  value,
   min = 0,
   max = 100,
   label,
@@ -22,7 +20,7 @@ const Slider: React.FC<FileDragUploadProps> = ({
   disabled,
 }) => {
   const sliderEl = useRef<HTMLInputElement | null>(null);
-  const [_value, _setValue] = useState(value);
+  const [_value, _setValue] = useState(20);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceSetter = useCallback(
@@ -32,7 +30,6 @@ const Slider: React.FC<FileDragUploadProps> = ({
     []
   );
 
-  // Function to update slider's background
   const updateSliderStyles = (
     slider: HTMLInputElement,
     value: number | string
@@ -46,7 +43,6 @@ const Slider: React.FC<FileDragUploadProps> = ({
     debounceSetter(val);
   };
 
-  // Sync slider background with the updated value
   useEffect(() => {
     if (sliderEl.current) {
       updateSliderStyles(sliderEl.current, _value);

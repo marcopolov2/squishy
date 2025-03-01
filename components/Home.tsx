@@ -31,14 +31,17 @@ const Home = () => {
   const savingSizing = Utils.getFileSize(savingSize).split(" ");
 
   const scrollToCompare = () => {
-    imageCompareRef?.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-      inline: "center",
-    });
+    setTimeout(() => {
+      imageCompareRef?.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center",
+      });
+    }, 200);
   };
 
   const handleFileChange = (file) => {
+    setQuality(20);
     setFile(file);
     setError(null);
     setUploadedFile(null);
@@ -103,7 +106,6 @@ const Home = () => {
               label="Quality:"
               min={1}
               max={80}
-              value={quality}
               setValue={setQuality}
               disabled={uploading}
             />

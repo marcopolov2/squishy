@@ -3,6 +3,9 @@ import { FILE_TYPES } from "../../../utils/images/constants";
 import sharp from "sharp";
 
 export async function POST(req: Request) {
+  let fileBuffer: Buffer | null = null;
+  let compressedBuffer: Buffer | null = null;
+
   try {
     const formData = await req.formData();
     const file = formData.get("file") as File | null;
@@ -13,7 +16,7 @@ export async function POST(req: Request) {
 
     const fileType: string = file.type.split("/")[1] || "";
 
-    if (!FILE_TYPES.find((file) => file === fileType)) {
+    if (!FILE_TYPES.includes(fileType)) {
       return NextResponse.json(
         {
           error: `File type ${fileType} not supported. Supported types are ${FILE_TYPES.join(
@@ -24,7 +27,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const fileBuffer = Buffer.from(await file.arrayBuffer());
+    fileBuffer = Buffer.from(await file.arrayBuffer());
     let width: number | null = null;
     let height: number | null = null;
 
@@ -46,8 +49,9 @@ export async function POST(req: Request) {
       );
     }
 
-    const compressedBuffer = await compress(fileBuffer);
+    compressedBuffer = await compress(fileBuffer);
     const base64Data = compressedBuffer.toString("base64");
+
     const fileData = {
       name: file.name,
       size: compressedBuffer.length,
@@ -64,6 +68,10 @@ export async function POST(req: Request) {
       { error: (error as Error).message },
       { status: 400 }
     );
+  } finally {
+    fileBuffer = null;
+    compressedBuffer = null;
+    global.gc?.(); // Explicit garbage collection if enabled
   }
 }
 
@@ -75,46 +83,78 @@ const getCompressionOptions = (
   height: number
 ) => {
   const options: { [key: string]: (buffer: Buffer) => Promise<Buffer> } = {
-    jpeg: (buffer) =>
-      sharp(buffer)
+    jpeg: async (buffer) => {
+      const instance = sharp(buffer);
+      const result = await instance
         .resize({ width, height, fit: "fill" })
         .jpeg({ quality })
-        .toBuffer(),
-    png: (buffer) =>
-      sharp(buffer)
+        .toBuffer();
+      instance.destroy();
+      return result;
+    },
+    png: async (buffer) => {
+      const instance = sharp(buffer);
+      const result = await instance
         .resize({ width, height, fit: "fill" })
         .png({ quality })
-        .toBuffer(),
-    webp: (buffer) =>
-      sharp(buffer)
+        .toBuffer();
+      instance.destroy();
+      return result;
+    },
+    webp: async (buffer) => {
+      const instance = sharp(buffer);
+      const result = await instance
         .resize({ width, height, fit: "fill" })
         .webp({ quality })
-        .toBuffer(),
-    tiff: (buffer) =>
-      sharp(buffer)
+        .toBuffer();
+      instance.destroy();
+      return result;
+    },
+    tiff: async (buffer) => {
+      const instance = sharp(buffer);
+      const result = await instance
         .resize({ width, height, fit: "fill" })
         .tiff({ quality })
-        .toBuffer(),
-    avif: (buffer) =>
-      sharp(buffer)
+        .toBuffer();
+      instance.destroy();
+      return result;
+    },
+    avif: async (buffer) => {
+      const instance = sharp(buffer);
+      const result = await instance
         .resize({ width, height, fit: "fill" })
         .avif({ quality, effort: 3 })
-        .toBuffer(),
-    heif: (buffer) =>
-      sharp(buffer)
+        .toBuffer();
+      instance.destroy();
+      return result;
+    },
+    heif: async (buffer) => {
+      const instance = sharp(buffer);
+      const result = await instance
         .resize({ width, height, fit: "fill" })
         .heif({ quality })
-        .toBuffer(),
-    jp2: (buffer) =>
-      sharp(buffer)
+        .toBuffer();
+      instance.destroy();
+      return result;
+    },
+    jp2: async (buffer) => {
+      const instance = sharp(buffer);
+      const result = await instance
         .resize({ width, height, fit: "fill" })
         .jp2({ quality })
-        .toBuffer(),
-    jxl: (buffer) =>
-      sharp(buffer)
+        .toBuffer();
+      instance.destroy();
+      return result;
+    },
+    jxl: async (buffer) => {
+      const instance = sharp(buffer);
+      const result = await instance
         .resize({ width, height, fit: "fill" })
         .jxl({ quality })
-        .toBuffer(),
+        .toBuffer();
+      instance.destroy();
+      return result;
+    },
   };
 
   return options[type] || null;
