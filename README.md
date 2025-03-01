@@ -81,7 +81,7 @@ This will start the Next.js application locally on port `3000`. You can now acce
    - "avif"
    - "heif"
    - "jxl"
-4. **No Database Hosting** - Squishy does not currently use a hosted database.
+4. **No Database Hosting** - Squishy does not currently use a hosted database, but a local JSON file.
 
 ## 🤖 **AI Assistance**
 
