@@ -84,7 +84,7 @@ This will start the Next.js application locally on port `3000`. You can now acce
 
 ## **Architectural Decisions**
 
-- **Sharp** used as it runs on the node runtime environment.After watching YT vids and reading online articlee, i could see it's widely for image compression on Node.
+- **Sharp** used as it runs on the node runtime environment. After watching YT vids and reading online articles, i could see it's widely used for image compression on Node.
 - **Next.js API Routes** per spec.
 - **Tailwind CSS** for easy css integration (dont have to make seperate css files for each component).
-- **Local JSON Database** used as this is simple, and had time restriction. In the real world images would be send to frontend using stored links (like Amazon S3).
+- **Local JSON Database** used as this is simple, and had coding time restriction. In the real world images would be uploaded to a cloud database, and then sent to frontend using url link to image (like Amazon S3).
